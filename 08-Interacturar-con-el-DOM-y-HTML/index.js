@@ -18,11 +18,11 @@ function crearTurno(){
 }
 
 let listadoMascotas = [];
-let opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR").toUpperCase() === 'A';
+let opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR").toUpperCase();
 
 while (opcion === "A"){
     listadoMascotas.push(crearTurno());
-    opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR").toUpperCase() === 'A';
+    opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR").toUpperCase();
 }
 
 if (listadoMascotas.length > 0){
@@ -39,7 +39,7 @@ localStorage.getItem("usuario");
 //Cambiar el titulo original
 document.getElementById("titulo").innerHTML = "Nuevo titulo de veterinaria";
 
-// Crear etiqueta p
+// Crear etiqueta para mostrar el total de los turnos asignados en el HTML.
 let mostrarTotal = document.createElement("p");
 // Insertar HTML interno
 mostrarTotal.innerHTML = `<h3 class="text-center">El total de los turnos es de ${listadoMascotas.length}</h3>`; 
