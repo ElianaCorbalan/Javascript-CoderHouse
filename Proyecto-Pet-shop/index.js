@@ -1,35 +1,37 @@
-class Turno {
-    constructor(nombreProp,nombreMascota,consulta){
-        this.nombre = nombreProp;
-        this.mascota = nombreMascota;
-        this.consulta = consulta;
+    
+    function guardar(){
+
+    var propietario = document.getElementById("propietario").value;
+    var mascota= document.getElementById("mascota").value;
+    var consulta = document.getElementById("consulta").value;
+
+    if(propietario.trim()==''){
+        alert("Ingrese nombre del propietario");
+        return false;
+    }
+    
+    if(mascota.trim()==''){
+        alert("Ingrese nombre de la mascota");
+        return false;
+    }
+    if(consulta.trim()==''){
+        alert("Ingrese datos de la consulta");
+        return false;
     }
 
-    detallesTurno() {
-        return "\nNOMBRE DEL PROPIETARIO: "+this.nombre +"\nNOMBRE DE MASCOTA: "+this.mascota + "\nTIPO DE CONSULTA: " + this.consulta+"\n"
-    }
+    //Listar en la tabla
+    var fila="<tr><td>"+propietario+"</td><td>"+mascota+"</td><td>"+consulta+"</td></tr>";
+    var crearCliente = document.createElement("tr");
+    crearCliente.innerHTML=fila;
+    document.getElementById("tabla-datos").appendChild(crearCliente);
 }
 
-function crearTurno(){
-    let nombreProp = prompt("Ingrese el nombre del propietario");
-    let nombreMascota  = prompt("Ingresar nombre de la mascota");
-    let consulta = prompt("Ingrese el motivo de su consulta");
-    return new Turno( nombreProp, nombreMascota , consulta);
-}
-
-let listadoMascotas = [];
-let opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR");
-
-while (opcion === "A"){
-    listadoMascotas.push(crearTurno());
-    opcion = prompt("INGRESAR (A) PARA CARGAR UNA MASCOTA \n PRESIONAR OTRA TECLA PARA SALIR");
-}
-
-if (listadoMascotas.length > 0){
-    for (const turno of listadoMascotas) {
-        console.log(turno.detallesTurno());
-    }
-}
-console.log(`El total delos turnos es de ${listadoMascotas.length}`);
+  //Guardar al hacer click
+    boton_agregar.addEventListener("click", guardar)
 
 
+// document.getElementById("propietario").value = "Eli";
+// document.getElementById("mascota").value   = "Byte";
+// document.getElementById("consulta").value   = "Vacunas";
+
+//Evento FOCUSIN o BLUR
