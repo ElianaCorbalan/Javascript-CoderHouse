@@ -33,7 +33,8 @@ const boton_agregar = document.getElementById('boton_agregar');
     }
 
 //Funcion para capturar los datos de los imputs
-function guardar() {
+function guardar(e) {
+    e.preventDefault();
     var propietario = document.getElementById("propietario").value;
     var mascota = document.getElementById("mascota").value;
     var consulta = document.getElementById("consulta").value;
