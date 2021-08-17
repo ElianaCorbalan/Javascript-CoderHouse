@@ -1,11 +1,8 @@
-const URL = "https://dog.ceo/api/breeds/image"
-
 class Turno {
-    constructor(propietario, mascota, consulta, date) {
+    constructor(propietario, mascota, consulta) {
         this.propietario = propietario;
         this.mascota = mascota;
         this.consulta = consulta;
-        this.date = date
     }
 }
 
@@ -22,7 +19,6 @@ function actualizarTabla() {
                         <td>${turno.propietario}</td>
                         <td>${turno.mascota}</td>
                         <td>${turno.consulta}</td>
-                        <td>${turno.date}</td>
                         <td><button id="boton_eliminar" type="button" onclick="eliminar(${listadoTurnos.indexOf(turno)})" class=" far fa-trash-alt btn btn-danger"></button></td>
                         </tr>`
             $("#tabla-datos").prepend(turnoHTML);
@@ -37,7 +33,7 @@ function guardar(e) {
     let listadoTurnos = JSON.parse(localStorage.getItem('turnos'))
     // si no encuentra el elemento en cache te inicializa el array vacio
     if (listadoTurnos == null) listadoTurnos = []
-    let turno = new Turno($("#propietario").val(), $("#mascota").val(), $("#consulta").val(), moment().format("DD/MM/YY hh:mm"));
+    let turno = new Turno($("#propietario").val(), $("#mascota").val(), $("#consulta").val());
     listadoTurnos.push(turno);
     localStorage.setItem('turnos', JSON.stringify(listadoTurnos));
     actualizarTabla();
@@ -57,36 +53,16 @@ function eliminar(index) {
 //Guardar al hacer click 
 $("#boton_agregar").click((e) => {
     if ($("#propietario").val() != "" && $("#mascota").val() != "" && $("#consulta").val() != "") {
-        swal("Excelente!", "Agregaste una consulta!", "success");
+        swal("Good job!", "You clicked the button!", "success");
         guardar(e)
     }
 });
+
 actualizarTabla();
 
-//Mostrar y ocualtar la tabla con los datos cargados
-$(document).ready(()=>{
-    $("#tabla").fadeOut();
-    $("#mostrar").click(()=>{
-        $("#tabla").fadeIn();
-    });
-    $("#ocultar").click(()=>{
-        $("#tabla").fadeOut();
-    });
-});
+///////////////////////////AJAX///////////////////////////////////////
+const URL = "https://dog.ceo/api/breeds/image"
 
-$("tr").on("mouseover", function(){
-    $(this).css("background-color", "#A9CCE3");
-})
-$("tr").on("mouseleave", function(){
-    $(this).css("background-color", "#EBF5FB");
-})
-
-$("#titulo").css("color", "#2E86C1")
-    .slideUp(0)
-    .delay(1000)  
-    .slideDown(2000)
-    
-//////AJAX///////
 $("#mostrarFotos").click(()=> {
     console.log("entro2")
     $.get(`${URL}/random/10`, function(res, state){
@@ -94,7 +70,7 @@ $("#mostrarFotos").click(()=> {
             console.log(res);
             for(const message of res.message) {
                 $(".fila2").append(`
-                                <div class="card col-sm-3 m-4">
+                                <div class="card col-sm-2 m-1">
                                     <img src="${message}"/>
                                 </div>`)
             }
@@ -102,6 +78,7 @@ $("#mostrarFotos").click(()=> {
     });
 });
 
-$("#ocultarFotos").click(() => { 
+$("#cerrarBtn2").click(() => { 
     $(".card").slideUp("fast");
 });
+
